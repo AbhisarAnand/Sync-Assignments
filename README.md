@@ -10,6 +10,7 @@
 - **Email Parsing**: Automatically parses assignment details from Gmail, reducing manual entry.
 - **Calendar Sync**: Creates Google Calendar events for each assignment with due dates and reminders.
 - **Task Sync**: Adds assignments to Google Tasks with comprehensive details.
+- **Todoist Integration**: Seamlessly integrates with Todoist, allowing for efficient task management alongside Google Tasks.
 - **Duplication Avoidance**: Intelligent checks to prevent duplicate calendar events and tasks.
 - **Log Management**: Maintains a detailed log of synced assignments, ensuring transparency and control.
 - **Automated Cleanup**: Removes past-due assignments from logs to keep your list current.
@@ -19,6 +20,9 @@
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Google API](https://img.shields.io/badge/Google%20API-4285F4?style=for-the-badge&logo=google&logoColor=white)
 ![JSON](https://img.shields.io/badge/JSON-000000?style=for-the-badge&logo=json&logoColor=white)
+![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)
+![GoogleCalendar](https://img.shields.io/badge/Google%20Calendar-4285F4?style=for-the-badge&logo=google-calendar&logoColor=white%60)
+![Todoist](https://img.shields.io/badge/Todoist-EF8E1F?style=for-the-badge&logo=todoist&logoColor=white%60)
 
 ## 🚀 Getting Started
 
@@ -58,8 +62,8 @@ Authenticate with Google on first run and follow prompts to sync assignments.
 ## 🛠️ How It Works
 
 - **GmailReader**: Scans Gmail for Brightspace assignment emails, extracting key information.
-- **GCalendarTasks**: Syncs the extracted assignment information with Google Calendar and Google Tasks, ensuring your academic schedule is always up-to-date.
-- **Main**: Orchestrates the flow from email parsing to calendar and task synchronization.
+- **GCalendarTasks & TodoistTasks**: Syncs the extracted assignment information with Google Calendar, Google Tasks, and Todoist, ensuring your academic schedule is always up-to-date across your preferred task management platforms.
+- **Main**: Orchestrates the flow from email parsing to calendar and task synchronization with both Google and Todoist services.
 
 ## 📄 License
 
