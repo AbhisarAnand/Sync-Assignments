@@ -67,8 +67,8 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 
 ## 📧 Contact
 
-For queries or support, please email us at `abhisar.muz@gmail.com`.
+For queries or support, please email us at [abhisar.muz@gmail.com](mailto:abhisar.muz@gmail.com).
 
 ---
 
-*Proudly created for Purdue University students.*
+*Proudly created for Purdue University students by Abhisar Anand.*
