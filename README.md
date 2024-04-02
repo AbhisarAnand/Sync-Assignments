@@ -18,7 +18,7 @@
 ![Google API](https://img.shields.io/badge/Google%20API-4285F4?style=for-the-badge&logo=google&logoColor=white)
 ![JSON](https://img.shields.io/badge/JSON-000000?style=for-the-badge&logo=json&logoColor=white)
 
-![Visitor Count](https://visitor-badge.laobi.icu/badge?page_id=AbhisarAnand.SyncAssignments)
+![Visitor Count](https://visitor-badge.laobi.icu/badge?page_id=abhisaranand.SyncAssignments)
 
 ## Getting Started
 
@@ -31,15 +31,15 @@
 ### Installation
 
 1. Clone the repository:
-    \```bash
+    ```bash
     git clone https://github.com/AbhisarAnand/Sync-Assignments
     cd SyncAssignments
-    \```
+    ```
 
 2. Install required Python packages:
-    \```bash
+    ```bash
     pip3 install -r requirements.txt
-    \```
+    ```
 
 3. Follow [Google's guide](https://developers.google.com/workspace/guides/create-credentials) to set up `client_secret.json` for Gmail and Google Calendar API.
 
@@ -50,9 +50,9 @@
 ### Usage
 
 Run the Sync Assignments tool:
-\```bash
+```bash
 python3 Main.py
-\```
+```
 Authenticate with Google on first run and follow prompts to sync assignments.
 
 ## How It Works
