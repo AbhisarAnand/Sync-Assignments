@@ -30,7 +30,7 @@ class GCalendarTasks:
         self.service = build('tasks', 'v1', credentials=creds)
 
     def read_task_log(self):
-        log_file_path = os.path.join(self.path, '../tasks_log.json')
+        log_file_path = os.path.join(self.path, 'gTasks_log.json')
         if not os.path.exists(log_file_path):
             return []
         
@@ -38,7 +38,7 @@ class GCalendarTasks:
             return [json.loads(line) for line in log_file]
 
     def write_task_log(self, tasks):
-        log_file_path = os.path.join(self.path, '../tasks_log.json')
+        log_file_path = os.path.join(self.path, 'gTasks_log.json')
         with open(log_file_path, 'w') as log_file:
             for task in tasks:
                 json.dump(task, log_file)
@@ -46,11 +46,17 @@ class GCalendarTasks:
 
     def create_google_task(self, task_name, due_date):
         current_time = datetime.datetime.utcnow()
+        due_date_utc = due_date.replace(tzinfo=None)
+
+        if due_date_utc <= current_time:
+            print(f"Skipping '{task_name}' as its due date is in the past.")
+            return
+
         tasks_log = self.read_task_log()
-        task_log_names = [task['task_name'] for task in tasks_log if task['due_date'] >= current_time.isoformat() + 'Z']
+        task_log_names = [task['task_name'] for task in tasks_log]
 
         if task_name not in task_log_names:
-            due_rfc3339 = due_date.isoformat() + 'Z'
+            due_rfc3339 = due_date_utc.isoformat() + 'Z'
             task = {
                 'title': task_name,
                 'due': due_rfc3339
@@ -67,15 +73,17 @@ class GCalendarTasks:
         else:
             print(f"Task '{task_name}' already exists. No new task created.")
 
+
+
     def sync_tasks(self):
         tasks_log = self.read_task_log()
-        # Filter out expired tasks
-        tasks_log = [task for task in tasks_log if task['due_date'] >= datetime.datetime.utcnow().isoformat() + 'Z']
+        tasks_log = [task for task in tasks_log if datetime.datetime.strptime(task['due_date'], '%Y-%m-%dT%H:%M:%SZ') >= datetime.datetime.utcnow()]
         self.write_task_log(tasks_log)
         
         for task_name, (course_name, due_datetime) in self.tasks.items():
             full_task_name = f"{task_name} - {course_name}"
-            self.create_google_task(full_task_name, due_datetime)
+            self.create_google_task(full_task_name, due_datetime) 
+
 
 if __name__ == '__main__':
     tasks = {
