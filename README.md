@@ -1,6 +1,6 @@
 # Sync Assignments
 
-## Thank You for Visiting!         ![Visitor Count](https://visitor-badge.laobi.icu/badge?page_id=abhisaranand.SyncAssignments)
+## Thank You for Visiting! &emsp; ![Visitor Count](https://visitor-badge.laobi.icu/badge?page_id=abhisaranand.SyncAssignments)
 
 **Sync Assignments** is a tool designed for Purdue University students to seamlessly integrate their academic assignments from Brightspace into their personal Google Calendar and Google Tasks. This automation tool scans your Gmail for emails related to course assignments, extracts key information, and ensures your calendar and tasks are up-to-date with your academic deadlines.
 
