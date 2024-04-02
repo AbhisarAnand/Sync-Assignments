@@ -8,9 +8,10 @@ from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 
 class GmailReader:
-    def __init__(self, credentials_path, token_path='token.json'):
-        self.credentials_path = credentials_path
-        self.token_path = token_path
+    def __init__(self, credentials_path='client_secret.json', token_path='GmailToken.json'):
+        path = os.path.dirname(os.path.abspath(__file__))
+        self.credentials_path = os.path.join(path, credentials_path)
+        self.token_path = os.path.join(path, token_path)
         self.service = None
         self.SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
         self.filteredEmails = []
