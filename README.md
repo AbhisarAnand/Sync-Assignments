@@ -1,10 +1,10 @@
-# Sync Assignments
+# Sync Assignments 📚
 
 ## Thank You for Visiting! &emsp; ![Visitor Count](https://visitor-badge.laobi.icu/badge?page_id=abhisaranand.SyncAssignments)
 
 **Sync Assignments** is a tool designed for Purdue University students to seamlessly integrate their academic assignments from Brightspace into their personal Google Calendar and Google Tasks. This automation tool scans your Gmail for emails related to course assignments, extracts key information, and ensures your calendar and tasks are up-to-date with your academic deadlines.
 
-## Features
+## 🌟 Features
 
 - **Brightspace Integration**: Specifically tuned for Purdue University students, focusing on assignment emails from Brightspace.
 - **Email Parsing**: Automatically parses assignment details from Gmail, reducing manual entry.
@@ -14,13 +14,13 @@
 - **Log Management**: Maintains a detailed log of synced assignments, ensuring transparency and control.
 - **Automated Cleanup**: Removes past-due assignments from logs to keep your list current.
 
-## Languages and Tools Used
+## 🔧 Languages and Tools Used
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Google API](https://img.shields.io/badge/Google%20API-4285F4?style=for-the-badge&logo=google&logoColor=white)
 ![JSON](https://img.shields.io/badge/JSON-000000?style=for-the-badge&logo=json&logoColor=white)
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -55,17 +55,17 @@ python3 Main.py
 ```
 Authenticate with Google on first run and follow prompts to sync assignments.
 
-## How It Works
+## 🛠️ How It Works
 
 - **GmailReader**: Scans Gmail for Brightspace assignment emails, extracting key information.
 - **GCalendarTasks**: Syncs the extracted assignment information with Google Calendar and Google Tasks, ensuring your academic schedule is always up-to-date.
 - **Main**: Orchestrates the flow from email parsing to calendar and task synchronization.
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License - see the `LICENSE` file for details.
 
-## Contact
+## 📧 Contact
 
 For queries or support, please email us at `abhisar.muz@gmail.com`.
 
