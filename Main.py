@@ -12,7 +12,7 @@ if __name__ == '__main__':
     reader.filter_messages(EMAIL)
     reader.break_down_email()
 
-    print("Tasks: ", reader.tasks)
+    # print("Tasks: ", reader.tasks)
 
     if GCAL_SYNC:
         calendar_tasks = GCalendarTasks(reader.tasks)
