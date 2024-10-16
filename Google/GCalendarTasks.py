@@ -5,6 +5,7 @@ from googleapiclient.discovery import build
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+from google.auth.exceptions import RefreshError
 
 class GCalendarTasks:
     def __init__(self, tasks, credentials_path='client_secret.json', token_path='TasksToken.json'):
@@ -28,7 +29,7 @@ class GCalendarTasks:
             if creds and creds.expired and creds.refresh_token:
                 try:
                     creds.refresh(Request())
-                except google.auth.exceptions.RefreshError:
+                except RefreshError:
                     print("Token expired or revoked. Re-authenticating...")
                     creds = None  # Set creds to None to trigger re-authentication
             if not creds:
