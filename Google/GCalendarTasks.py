@@ -18,16 +18,25 @@ class GCalendarTasks:
     def authenticate(self):
         creds = None
         if os.path.exists(self.token_path):
-            creds = Credentials.from_authorized_user_file(self.token_path, self.SCOPES)
+            try:
+                creds = Credentials.from_authorized_user_file(self.token_path, self.SCOPES)
+            except Exception as e:
+                print("Error loading credentials:", e)
+                creds = None
+
         if not creds or not creds.valid:
             if creds and creds.expired and creds.refresh_token:
-                creds.refresh(Request())
-            else:
+                try:
+                    creds.refresh(Request())
+                except google.auth.exceptions.RefreshError:
+                    print("Token expired or revoked. Re-authenticating...")
+                    creds = None  # Set creds to None to trigger re-authentication
+            if not creds:
                 flow = InstalledAppFlow.from_client_secrets_file(self.credentials_path, self.SCOPES)
                 creds = flow.run_local_server(port=0)
-            with open(self.token_path, 'w') as token:
-                token.write(creds.to_json())
-        self.service = build('tasks', 'v1', credentials=creds)
+                with open(self.token_path, 'w') as token:
+                    token.write(creds.to_json())
+        self.service = build('gmail', 'v1', credentials=creds)
 
     def read_task_log(self):
         log_file_path = os.path.join(self.path, 'gTasks_log.json')
