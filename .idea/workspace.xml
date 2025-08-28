@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c54700e-441c-4b9f-a743-3c276e818760" name="Changes" comment="" />
+    <list default="true" id="1c54700e-441c-4b9f-a743-3c276e818760" name="Changes" comment="fixed token expiration bug" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,5 +69,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fixed token expiration bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed token expiration bug" />
   </component>
 </project>

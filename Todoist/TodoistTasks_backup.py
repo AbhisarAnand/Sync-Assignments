@@ -25,95 +25,67 @@ class TodoistTasks:
     def list_all_projects(self):
         """Debug method to list all available projects"""
         try:
-            projects_paginator = self.api.get_projects()
-            projects_data = list(projects_paginator)  # Convert paginator to list
-            
-            # Handle case where paginator returns a list containing a list of projects
-            if len(projects_data) == 1 and isinstance(projects_data[0], list):
-                projects = projects_data[0]
-            else:
-                projects = projects_data
-                
-            print(f"Found {len(projects)} projects:")
-            for i, project in enumerate(projects):
-                print(f"  Project {i}:")
-                if hasattr(project, 'name'):
-                    print(f"    - Name: '{project.name}', ID: {project.id}")
-                elif isinstance(project, dict):
-                    print(f"    - Name: '{project.get('name')}', ID: {project.get('id')}")
-                else:
-                    print(f"    - Raw project object: {project}")
+            projects = self.api.get_projects()
+            print("Available projects:")
+            if isinstance(projects, list):
+                for project in projects:
+                    if hasattr(project, 'name'):
+                        print(f"  - Name: '{project.name}', ID: {project.id}")
+                    elif isinstance(project, dict):
+                        print(f"  - Name: '{project.get('name')}', ID: {project.get('id')}")
             return projects
         except Exception as e:
             print(f"Error fetching projects: {e}")
-            import traceback
-            traceback.print_exc()
             return []
 
     def list_all_sections(self, project_id):
         """Debug method to list all sections in a project"""
         try:
-            sections_paginator = self.api.get_sections(project_id=project_id)
-            sections_data = list(sections_paginator)  # Convert paginator to list
-            
-            # Handle case where paginator returns a list containing a list of sections
-            if len(sections_data) == 1 and isinstance(sections_data[0], list):
-                sections = sections_data[0]
-            else:
-                sections = sections_data
-                
-            print(f"Found {len(sections)} sections in project ID {project_id}:")
-            for i, section in enumerate(sections):
-                print(f"  Section {i}:")
-                if hasattr(section, 'name'):
-                    print(f"    - Name: '{section.name}', ID: {section.id}")
-                elif isinstance(section, dict):
-                    print(f"    - Name: '{section.get('name')}', ID: {section.get('id')}")
-                else:
-                    print(f"    - Raw section object: {section}")
+            sections = self.api.get_sections(project_id=project_id)
+            print(f"Available sections in project ID {project_id}:")
+            if isinstance(sections, list):
+                for section in sections:
+                    if hasattr(section, 'name'):
+                        print(f"  - Name: '{section.name}', ID: {section.id}")
+                    elif isinstance(section, dict):
+                        print(f"  - Name: '{section.get('name')}', ID: {section.get('id')}")
             return sections
         except Exception as e:
             print(f"Error fetching sections: {e}")
-            import traceback
-            traceback.print_exc()
             return []
 
     def get_project_id(self, project_name):
         try:
-            projects_paginator = self.api.get_projects()
-            projects_data = list(projects_paginator)  # Convert paginator to list
-            
-            # Handle case where paginator returns a list containing a list of projects
-            if len(projects_data) == 1 and isinstance(projects_data[0], list):
-                projects = projects_data[0]
+            projects = self.api.get_projects()
+            # Handle both list and object responses
+            if isinstance(projects, list):
+                for project in projects:
+                    if hasattr(project, 'name') and project.name == project_name:
+                        return project.id
+                    elif isinstance(project, dict) and project.get('name') == project_name:
+                        return project.get('id')
             else:
-                projects = projects_data
-            
-            for project in projects:
-                if hasattr(project, 'name') and project.name == project_name:
-                    return project.id
-                elif isinstance(project, dict) and project.get('name') == project_name:
-                    return project.get('id')
+                # If projects is a single object
+                if hasattr(projects, 'name') and projects.name == project_name:
+                    return projects.id
         except Exception as e:
             print(f"An error occurred while fetching projects: {e}")
         return None
 
     def get_section_id(self, project_id, section_name):
         try:
-            sections_paginator = self.api.get_sections(project_id=project_id)
-            sections_data = list(sections_paginator)  # Convert paginator to list
-            
-            # Handle case where paginator returns a list containing a list of sections
-            if len(sections_data) == 1 and isinstance(sections_data[0], list):
-                sections = sections_data[0]
+            sections = self.api.get_sections(project_id=project_id)
+            # Handle both list and object responses
+            if isinstance(sections, list):
+                for section in sections:
+                    if hasattr(section, 'name') and section.name == section_name:
+                        return section.id
+                    elif isinstance(section, dict) and section.get('name') == section_name:
+                        return section.get('id')
             else:
-                sections = sections_data
-            
-            for section in sections:
-                if hasattr(section, 'name') and section.name == section_name:
-                    return section.id
-                elif isinstance(section, dict) and section.get('name') == section_name:
-                    return section.get('id')
+                # If sections is a single object
+                if hasattr(sections, 'name') and sections.name == section_name:
+                    return sections.id
         except Exception as e:
             print(f"An error occurred while fetching sections: {e}")
         return None
@@ -169,8 +141,10 @@ class TodoistTasks:
 
         if self.project_id is None:
             self.project_id = self.get_project_id(PROJECT_NAME)
+            print(f"Debug: Found project ID for '{PROJECT_NAME}': {self.project_id}")
         if self.section_id is None:
             self.section_id = self.get_section_id(self.project_id, SECTION_NAME)
+            print(f"Debug: Found section ID for '{SECTION_NAME}': {self.section_id}")
 
         tasks_log = self.read_task_log()
         task_log_names = [task['task_name'] for task in tasks_log]
@@ -211,6 +185,9 @@ class TodoistTasks:
             print("Cleaned up tasks from log file with due dates in the past.")
 
     def sync_tasks(self):
+        # First run debug to see what's available
+        self.debug_sync_setup()
+        
         self.clean_task_log()
         for task_name, (course_name, due_datetime) in self.tasks.items():
             # Handle both string and datetime objects

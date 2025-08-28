@@ -1,6 +1,6 @@
 EMAIL = "anana06@pfw.edu"
 
-GCAL_SYNC = True
+GCAL_SYNC = False
 TODOIST_SYNC = True
 
 # TODOIST
